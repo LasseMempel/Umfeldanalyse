@@ -2,6 +2,8 @@ import requests
 import html_text
 from htmldate import find_date
 import pandas as pd
+import json
+import time
 
 # OpenRouter API endpoint and key
 from config import API_KEY
@@ -66,11 +68,8 @@ def generatePayload(model, prompt, context):
                     "description": "Land, in dem die Ressource veröffentlicht wurde"
                 },
                 "Schlagworte": {
-                    "type": "array",
-                    "items": {
-                    "type": "string"
-                    },
-                    "description": "Schlagworte, die die Ressource beschreiben"
+                    "type": "string",
+                    "description": "Schlagworte, die die Ressource beschreiben. Getrennt durch Komma"
                 },
                 "Kurz Beschreibung": {
                     "type": "string",
@@ -81,16 +80,16 @@ def generatePayload(model, prompt, context):
                     "enum": ["Ontologie", "Vokabular", "Datenschema", "Fachtext", "Datenbank"],
                     "description": "Kategorie der Ressource"
                 },
-                "Institution": {
-                    "type": "string",
-                    "description": "Institution, die die Ressource veröffentlicht hat"
-                },
-                "Format": {
+                "Software / Modell / Format": {
                     "type": "string",
                     "description": "Format der Ressource (z.B. PDF, HTML, CSV, JSON, RDF, XML, OWL, MediaWiki). Mehrere Formate durch Komma getrennt"
                 },
+                "Open access": {
+                    "type": "string",
+                    "description": "Ist die Ressource offen verfügbar? X für ja, - für nein."
                 },
-                "required": ["Lizenz", "Sprache", "Land", "Schlagworte", "Kurz Beschreibung", "Kategorie", "Institution", "Format", "Open access"],
+                },
+                "required": ["Lizenz", "Sprache", "Land", "Schlagworte", "Kurz Beschreibung", "Kategorie",  "Software / Modell / Format", "Open access"],
                 "additionalProperties": False
             }
             }
@@ -101,17 +100,17 @@ def generatePayload(model, prompt, context):
 
 def generatePrompt(Ressource):
     prompt = f"""
-    Ermittle unter Zuhilfenahme des folgenden Textes die aufgelisteten Informationen über die Ressource {Ressource}: 
+    Ermittle unter Zuhilfenahme des folgenden Textes die aufgelisteten Informationen über die Ressource: {Ressource}.
     - Lizenz # Lizenz, unter der die Ressource veröffentlicht ist
     - Sprache  # Sprache der Ressource
     - Land # Land, in dem die Ressource veröffentlicht wurde
-    - Schlagworte # Schlagworte, die die Ressource beschreiben
+    - Schlagworte # Schlagworte, die die Ressource beschreiben, getrennt durch Komma
     - Kurz Beschreibung # kurze Beschreibung der Ressource
     - Kategorie # entweder Ontologie, Vokabular, Datenschema, Fachtext (wie z.B. ein Wiki) oder Datenbank
-    - Institution  # Institution, die die Ressource veröffentlicht hat
-    - Format  # Format der Ressource (z.B. PDF, HTML, JSON)
+    - Software / Modell / Format  # Format der Ressource (z.B. PDF, HTML, JSON)
+    - Open access # x für ja, - für nein. Ob die Ressource Open Access ist oder nicht
 
-    Bist du bei einer der Informationen unsicher, nehme als Wert einen leeren String "".
+    Sind Informationen nicht explizit verfügbar, wähle als Wert einen leeren String "".
 
     Hier ist der Text:
 
@@ -120,6 +119,7 @@ def generatePrompt(Ressource):
 
 models = [
     "google/gemini-2.0-flash-exp:free",
+    "google/gemini-2.5-pro-exp-03-25:free",
     "google/gemma-3-27b-it:free", 
     "deepseek/deepseek-r1-distill-llama-70b:free", 
     "nvidia/llama-3.1-nemotron-70b-instruct:free",
@@ -131,7 +131,6 @@ models = [
     "mistralai/mistral-nemo:free",
     "google/gemma-2-9b-it:free"
     # unused
-    "google/gemini-2.5-pro-exp-03-25:free",
     "deepseek/deepseek-chat-v3-0324:free",
     "google/gemini-2.5-pro-exp-03-25:free",
     "qwen/qwq-32b:free",
@@ -146,28 +145,36 @@ if __name__ == "__main__":
     link = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRn7-bEMXaFl5KXDok508vQFS95PzWddFYYjJbhlhx8ARBgzPJg8nYAeOgCOVwFaQ/pub?output=csv"
     response = requests.get(link)
     df = pd.read_csv(link)
-    # add additional column "Letzte Aktualisierung"
+    # reduce df to only 5 rows
+    #df = df.head(1)
     df["Letzte Aktualisierung"] = ""
+    optionalColumns = ["Software / Modell / Format", "Open access", "Lizenz", "Sprache", "Land", "Kategorie"]
+    facultativeColumns = ["Kurz Beschreibung", "Schlagworte"]
     for index, row in df.iterrows():
-        # reset website
+        # reset context, website and additionalContext
+        context = ""
         additionalContext = ""
         website = ""
-        # Extract the values from the row
         Name = row["Name"]
         Responsive = row["Responsive"]
-        # if Name not nan
+        Kategorie = row["Kategorie"]
         if pd.isna(Name):
             print("Name is NaN")
             continue
         print(f"Working on {index}: {Name}" )
+        print("\n")
         if Responsive:
-            website = df["Website"]
-            #html = requests.get(website).text
-            date = find_date(website)
-            print(date)
-            # add date to Letzte Aktualisierung
-            df.at[index, "Letzte Aktualisierung"] = date
-            #context = html_text.extract_text(html)
+            website = row["Website"]
+            try:
+                date = find_date(website)
+                df.at[index, "Letzte Aktualisierung"] = date
+            except:
+                print("Coudn't get date")
+            try:
+                html = requests.get(website).text
+                context = html_text.extract_text(html)
+            except:
+                print("Coudn't get website")
         Themen = row["Themen (aufteilen in Kurz Beschreibung und Schlagworten, danach löschen)"]
         if not pd.isna(Themen):
             Themen = Themen.replace("Alle", "").strip()
@@ -178,46 +185,33 @@ if __name__ == "__main__":
             Fachbereich = Fachbereich.replace("Alle", "").strip()
             if Fachbereich:
                 additionalContext += Fachbereich 
-        print("Name:", Name, ", Responsive:", Responsive)
+        totalContext = context
         if additionalContext:
-            print("Kontext: ", additionalContext)
+            totalContext += "Schlagwörter hier in Schlagwörter und Kurzbeschreibung in Kurzbeschreibung integrieren: +\n" + additionalContext
+        prompt = generatePrompt(Name)
+        structuredPayload = generatePayload(models[0], prompt, totalContext)
+        gotResult = False
+        while not gotResult:
+            try:
+                result = generateTextFromText(structuredPayload)
+                print(result)
+                result = result["choices"][0]["message"]["content"]
+                result = json.loads(result)
+                gotResult = True
+            except Exception as e:
+                print(f"Error: {e}")
+                time.sleep(5)
         print("\n")
+        for column in optionalColumns:
+            if pd.isna(row[column]):
+                if result[column] != "":
+                    df.at[index, column] = "<KI-Generiert> " + result[column]
+        for column in facultativeColumns:
+            if result[column] != "":
+                df.at[index, column] = "<KI-Generiert> " + result[column]
+        # delay of 5 seconds between requests
+        time.sleep(5)
     # replace newlines in cells with spaces
     df = df.replace(r'\n', ' ', regex=True)
     # save df to csv 
     df.to_csv("output.csv", index=False)
-        
-
-    """
-    prompt = generatePrompt("")
-
-    for model in models:
-
-
-
-
-
-        result = generateTextFromText(structuredPayload)
-        print(f"Model: {model}")
-        try:
-            print(result['choices'][0]['message']['content'])#.replace('```json\n', '').replace('\n```', ''))
-        except:
-            print(result)
-"""
-"""
-
-{
-"Lizenz":X, # Lizenz, unter der die Quelle veröffentlicht ist
-"Sprache":X, # Sprache der Ressource
-"Land":X, # Land, in dem die Ressource veröffentlicht wurde
-"Schlagworte": [X,Y,Z], # Schlagworte, die die Ressource beschreiben
-"Kurz Beschreibung":X, # kurze Beschreibung der Ressource
-"Kategorie":x, # Ontologie, Vokabular, Datenschema, Fachtext (wie z.B. ein Wiki) oder Datenbank
-"Institution":X, # Institution, die die Ressource veröffentlicht hat
-"Format":X, # Format der Ressource (z.B. PDF, HTML, JSON)
-"Open access":X, # True/False. Ob die Ressource Open Access ist oder nicht
-}
-
-"""
-
-
