@@ -1,0 +1,371 @@
+{
+    "Sammlungen": [
+        "Sammlung"
+    ],
+    "Abkürzungen": [
+        "Abkürzung"
+    ],
+    "Phrasen": [
+        "Phrase"
+    ],
+    "Drucke": [
+        "Druck"
+    ],
+    "Bilder": [
+        "Bild"
+    ],
+    "Objekte": [
+        "Objekt"
+    ],
+    "Fossilien": [
+        "Fossilium"
+    ],
+    "Gesteine": [
+        "Gestein"
+    ],
+    "Mineralien": [
+        "Mineralium"
+    ],
+    "Maßnahmen": [
+        "Maßnahme"
+    ],
+    "Schutzflächen": [
+        "Schutzfläche"
+    ],
+    "Methoden": [
+        "Methode"
+    ],
+    "Materialien": [
+        "Materialium"
+    ],
+    "Burgen": [
+        "Burge"
+    ],
+    "Bauwerke": [
+        "Bauwerk"
+    ],
+    "Funde": [
+        "Fund"
+    ],
+    "Mappingdienste": [
+        "Mappingdienst"
+    ],
+    "Kunststoffe": [
+        "Kunststoff"
+    ],
+    "Kautschuke": [
+        "Kautschuk"
+    ],
+    "Schadensphänomene": [
+        "Schadensphänomen"
+    ],
+    "Grabungsrichtlinien": [
+        "Grabungsrichtlinie"
+    ],
+    "Formulare": [
+        "Formular"
+    ],
+    "Oberbegriffe": [
+        "Oberbegriff"
+    ],
+    "Klassen": [
+        "Klasse"
+    ],
+    "Relationen": [
+        "Relation"
+    ],
+    "Normdaten": [
+        "Normdatum"
+    ],
+    "Metadatenstandards": [
+        "Metadatenstandard"
+    ],
+    "Empfehlungen": [
+        "Empfehlung"
+    ],
+    "Farben": [
+        "Farbe"
+    ],
+    "Fasern": [
+        "Faser"
+    ],
+    "Metadaten": [
+        "Metadate"
+    ],
+    "Schäden": [
+        "Schaden"
+    ],
+    "Lacke": [
+        "Lack"
+    ],
+    "Baumaterialien": [
+        "Baumaterialie"
+    ],
+    "Einheiten": [
+        "Einheit"
+    ],
+    "Verweise": [
+        "Verweis"
+    ],
+    "Prüfmethoden": [
+        "Prüfmethode"
+    ],
+    "Farbstoffe": [
+        "Farbstoff"
+    ],
+    "Koordinatenbezugssysteme": [
+        "Koordinatenbezugssystem"
+    ],
+    "EPSG-Codes": [
+        "EPSG-Code"
+    ],
+    "Materialeigenschaften": [
+        "Materialeigenschaft"
+    ],
+    "Medien": [
+        "Medium"
+    ],
+    "Pigmente": [
+        "Pigment"
+    ],
+    "Epochen": [
+        "Epoche"
+    ],
+    "Schlagworte": [
+        "Schlagwort"
+    ],
+    "Personen": [
+        "Person"
+    ],
+    "Werke": [
+        "Werk"
+    ],
+    "Körperschaften": [
+        "Körperschaft"
+    ],
+    "Sachbegriffe": [
+        "Sachbegriff"
+    ],
+    "Allgemeinbegriffe": [
+        "Allgemeinbegriff"
+    ],
+    "Konferenzen": [
+        "Konferenz"
+    ],
+    "Geodaten": [
+        "Geodat"
+    ],
+    "Darstellungsdienste": [
+        "Darstellungsdienst"
+    ],
+    "Koordinaten": [
+        "Koordinate"
+    ],
+    "Namen": [
+        "Name"
+    ],
+    "Ortsnamen": [
+        "Ortsname"
+    ],
+    "Chemikalien": [
+        "Chemikalie"
+    ],
+    "Arbeitspraktiken": [
+        "Arbeitspraktik"
+    ],
+    "Berufe": [
+        "Beruf"
+    ],
+    "Formate": [
+        "Format"
+    ],
+    "Schallaufnahmen": [
+        "Schallaufnahme"
+    ],
+    "Schallplatten": [
+        "Schallplatte"
+    ],
+    "Zeitstufen": [
+        "Zeitstufe"
+    ],
+    "Orte": [
+        "Ort"
+    ],
+    "Begriffssammlungen": [
+        "Begriffssammlung"
+    ],
+    "In-situ-Mosaiken": [
+        "In-situ-Mosaik"
+    ],
+    "Umweltinformationen": [
+        "Umweltinformation"
+    ],
+    "Künstlerbiografien": [
+        "Künstlerbiografie"
+    ],
+    "Rezepte": [
+        "Rezept"
+    ],
+    "Handschriften": [
+        "Handschrift"
+    ],
+    "Bücher": [
+        "Buch"
+    ],
+    "Dokumentationsrichtlinien": [
+        "Dokumentationsrichtlinie"
+    ],
+    "Materialwissenschaften": [
+        "Materialwissenschaft"
+    ],
+    "Fachbegriffe": [
+        "Fachbegriff"
+    ],
+    "Baustoffe": [
+        "Baustoff"
+    ],
+    "Museumsdaten": [
+        "Museumsdatum"
+    ],
+    "Feuchtbodenfunde": [
+        "Feuchtbodenfund"
+    ],
+    "Werkstoffe": [
+        "Werkstoff"
+    ],
+    "Mustersammlungen": [
+        "Mustersammlung"
+    ],
+    "Ausstellungsmaterialien": [
+        "Ausstellungsmateriali"
+    ],
+    "Richtlinien": [
+        "Richtlinie"
+    ],
+    "Aspekte": [
+        "Aspekt"
+    ],
+    "Systematiken": [
+        "Systematik"
+    ],
+    "Bibliotheken": [
+        "Bibliothek"
+    ],
+    "Archive": [
+        "Archiv"
+    ],
+    "Schadstoffe": [
+        "Schadstoff"
+    ],
+    "Biografien": [
+        "Biografie"
+    ],
+    "Patronate": [
+        "Patronat"
+    ],
+    "Attribute": [
+        "Attribut"
+    ],
+    "Technologien": [
+        "Technologie"
+    ],
+    "Geodatenstandards": [
+        "Geodatenstandard"
+    ],
+    "Sensoren": [
+        "Sensor"
+    ],
+    "Webdienste": [
+        "Webdienst"
+    ],
+    "Ausstellungskataloge": [
+        "Ausstellungskatalog"
+    ],
+    "Gehäuseformate": [
+        "Gehäuseformat"
+    ],
+    "Medienformate": [
+        "Medienformat"
+    ],
+    "Forschungsdaten": [
+        "Forschungsdatum"
+    ],
+    "Altertumswissenschaften": [
+        "Altertumswissenschaft"
+    ],
+    "Papiersorten": [
+        "Papiersorte"
+    ],
+    "Verlagsmerkmale": [
+        "Verlagsmerkmal"
+    ],
+    "Informationssysteme": [
+        "Informationssystem"
+    ],
+    "Veranstaltungen": [
+        "Veranstaltung"
+    ],
+    "Geowissenschaften": [
+        "Geowissenschaft"
+    ],
+    "Atommodelle": [
+        "Atommodell"
+    ],
+    "Salze": [
+        "Salz"
+    ],
+    "Stile": [
+        "Stil"
+    ],
+    "Daten": [
+        "Datum"
+    ],
+    "Vermessungsdaten": [
+        "Vermessungsdatum"
+    ],
+    "Geometriedaten": [
+        "Geometriedatum"
+    ],
+    "Merkmale": [
+        "Merkmal"
+    ],
+    "Denkmaltypen": [
+        "Denkmaltyp"
+    ],
+    "Institutionen": [
+        "Institution"
+    ],
+    "Namensnormdaten": [
+        "Namensnormdatum"
+    ],
+    "Bürgerhäuser": [
+        "Bürgerhaus"
+    ],
+    "Malereischichten": [
+        "Malereischicht"
+    ],
+    "Bildthemen": [
+        "Bildthema"
+    ],
+    "Adressen": [
+        "Adresse"
+    ],
+    "Vektordaten": [
+        "Vektordatum"
+    ],
+    "Karten": [
+        "Karte"
+    ],
+    "Eigenschaften": [
+        "Eigenschaft"
+    ],
+    "Individuen": [
+        "Individuum"
+    ],
+    "Datenwerte": [
+        "Datenwert"
+    ],
+    "Akteure": [
+        "Akteur"
+    ]
+}
